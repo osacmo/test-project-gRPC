@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "io.grpc.examples.usuarios";
+option java_outer_classname = "UsuarioProto";
+option objc_class_prefix = "HLW";
+
+package usuarios;
+
+service Usuarios{
+  rpc AgregarUsuario (Usuario) returns (Reply) {}
+  rpc ObtenerUsuarios (Empty) returns (stream Usuario) {}
+}
+
+message Usuario {
+  string name = 1;
+  int32 age = 2;
+}
+
+message Reply {
+  string message = 1;
+}
+
+message Empty {}
+
