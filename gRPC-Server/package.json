@@ -2,9 +2,12 @@
   "name": "grpc-server",
   "version": "1.0.0",
   "description": "",
-  "main": "greeter_server.js",
+  "main": "./dist-gRPC-Server/greeter_server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "sh proto/build.sh",
+    "buildTSC": "tsc",
+    "dev": "node ./dist-gRPC-Server/gRPC_server.js"
   },
   "keywords": [],
   "author": "",
@@ -14,7 +17,12 @@
     "@grpc/proto-loader": "^0.7.6",
     "async": "^3.2.4",
     "google-protobuf": "^3.21.2",
-    "lodash": "^4.17.21",
+    "grpc-tools": "^1.12.4",
     "mysql": "^2.18.1"
+  },
+  "devDependencies": {
+    "@types/mysql": "^2.15.21",
+    "grpc_tools_node_protoc_ts": "^5.3.3",
+    "typescript": "^5.0.3"
   }
 }
