@@ -4,7 +4,12 @@
   "description": "",
   "main": "greeter_client.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ./dist-gRPC-Client/api_server.js",
+    "dev:tsc": "tsc --watch",
+    "build": "npm run build:clean && npm run build:tsc",
+    "build:grpc": "sh proto/build.sh",
+    "build:tsc": "tsc",
+    "build:clean": "rm -r dist-gRPC-Client; exit 0"
   },
   "keywords": [],
   "author": "",
@@ -14,7 +19,14 @@
     "@grpc/proto-loader": "^0.7.6",
     "cors": "^2.8.5",
     "express": "^4.18.2",
+    "google-protobuf": "^3.21.2",
+    "grpc-tools": "^1.12.4",
     "minimist": "^1.2.8",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "ts-protoc-gen": "^0.15.0"
+  },
+  "devDependencies": {
+    "grpc_tools_node_protoc_ts": "^5.3.3",
+    "typescript": "^5.0.4"
   }
 }

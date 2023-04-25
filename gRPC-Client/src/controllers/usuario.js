@@ -1,5 +1,5 @@
 const { response, request } = require('express');
-const client = require('../gRPC_client');
+const client = require('../../gRPC_client');
 
 const crearUsuario = (req = request, res = response) => {
 
@@ -7,19 +7,27 @@ const crearUsuario = (req = request, res = response) => {
         name: req.body.name,
         age: req.body.age
     }
+    console.log(data_caso);
+
+    console.log(client.AgregarUsuario);
 
     client.AgregarUsuario(data_caso, (err, response) => {
-        res.status(200).json({
+        console.log(response.MsgResponse);
+    console.log(JSON.stringify(response))
+
+       /*  res.status(200).json({
             mensaje: response.message
-        });
+        }); */
     });
 }
 
 const getUsuarios = (req = request, res = response) => {
     const rows = [];
-    const call = client.ObtenerUsuarios();
+    //const call = client.ObtenerUsuarios();
 
-    call.on('data', (data) => {
+    console.log(client);
+
+    /* call.on('data', (data) => {
         rows.push(data);
     });
     call.on('end', () => {
@@ -28,7 +36,7 @@ const getUsuarios = (req = request, res = response) => {
     });
     call.on('error', (e) => {
         console.log("Error al obtener la data");
-    });
+    }); */
 }
 
 module.exports = {

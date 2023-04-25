@@ -1,21 +1,24 @@
 
 import connection from "../database/connection";
 import { ServerUnaryCall, sendUnaryData } from "@grpc/grpc-js";
-import { Empty, MsgResponse, Usuario, UsuariosResponse } from "../../proto/usuarios_pb";
+import { Empty, MsgResponse, ObjectResponse, Usuario, UsuariosResponse } from "../../proto/usuarios_pb";
 
 
-export const AgregarUsuario = (call: ServerUnaryCall<Usuario, MsgResponse>, callback: sendUnaryData<MsgResponse>) => {
+export const AgregarUsuario = (call: ServerUnaryCall<Usuario, ObjectResponse>, callback: sendUnaryData<ObjectResponse>) => {
 
     const name = call.request;
     const age = call.request;
     const query = `INSERT INTO user(name, age) VALUES('${name}','${age}')`;
-    const message = new MsgResponse();
-    message.setMessage("User created.")
+ 
+
+    const efe = new ObjectResponse()
+    const ey = new MsgResponse();
+    ey.setMessage("OK")
+    efe.addMsg(ey)
 
     connection.query(query, (err) => {
         if (err) throw (err);
-
-        callback(null, message);
+        callback(null, efe);
     });
 }
 
