@@ -1,37 +1,39 @@
-
 import connection from "../database/connection";
 import { ServerUnaryCall, sendUnaryData } from "@grpc/grpc-js";
-import { Empty, MsgResponse, ObjectResponse, Usuario, UsuariosResponse } from "../../proto/usuarios_pb";
+import { Empty, MsgResponse, Usuario, UsuariosResponse } from "../../proto/usuarios_pb";
 
+export const AgregarUsuario = (call: ServerUnaryCall<Usuario, MsgResponse>, callback: sendUnaryData<MsgResponse>) => {
 
-export const AgregarUsuario = (call: ServerUnaryCall<Usuario, ObjectResponse>, callback: sendUnaryData<ObjectResponse>) => {
+    const name = call.request.getAge()
+    const age = call.request.getName()
+    const query = `INSERT INTO usuario(usuario, contraseña, estatus, tipoUsuario_idtipoUsuario) VALUES('${name}','${age}', '1', '1')`;
 
-    const name = call.request;
-    const age = call.request;
-    const query = `INSERT INTO user(name, age) VALUES('${name}','${age}')`;
- 
-
-    const efe = new ObjectResponse()
-    const ey = new MsgResponse();
-    ey.setMessage("OK")
-    efe.addMsg(ey)
+    const mess = new MsgResponse()
+    mess.setMessage("User created.")
 
     connection.query(query, (err) => {
         if (err) throw (err);
-        callback(null, efe);
+        callback(null, mess);
     });
 }
 
 export const ObtenerUsuarios = (call: ServerUnaryCall<Empty, UsuariosResponse>, callback: sendUnaryData<UsuariosResponse>) => {
-    const query = 'SELECT * FROM user';
-    connection.query(query, function (err, results) {
-        if (err) throw (err);
+    const query = 'SELECT usuario, estatus from usuario';
 
-        const users = new UsuariosResponse();
-        console.log(results);
-        //users.setUsuariosresponseList(results.)
-        //call.end();
-    });
+    const us1 = new Usuario()
+    us1.setName("Oscar");
+    us1.setAge(20);
+
+    const us2 = new Usuario()
+    us2.setName("Erik");
+    us2.setAge(20);
+
+    const data: Array<Usuario> = [us1, us2];
+
+    connection.query(query, (err, result) => {
+        if (err) console.log(err);
+        const user_res = new UsuariosResponse();
+        user_res.setUsuariosresponseList(data)
+        callback(null, user_res);
+    })
 }
-
-

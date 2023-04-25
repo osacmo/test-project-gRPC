@@ -7,10 +7,10 @@ import { UsuariosService } from '../proto/usuarios_grpc_pb';
 function main() {
     const server = new Server();
     server.addService(UsuariosService, {
-        AgregarUsuario,
-        ObtenerUsuarios
+        agregarUsuario: AgregarUsuario,
+        obtenerUsuarios: ObtenerUsuarios
     });
-    server.bindAsync('0.0.0.0:50051', ServerCredentials.createInsecure(), () => {
+    server.bindAsync('0.0.0.0:8080', ServerCredentials.createInsecure(), () => {
         server.start();
         console.log('gRPC-Server on port 50051');
     });
