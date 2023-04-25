@@ -8,8 +8,8 @@ option objc_class_prefix = "HLW";
 package usuarios;
 
 service Usuarios{
-  rpc AgregarUsuario (Usuario) returns (Reply) {}
-  rpc ObtenerUsuarios (Empty) returns (stream Usuario) {}
+  rpc AgregarUsuario (Usuario) returns (MsgResponse) {}
+  rpc ObtenerUsuarios (Empty) returns (UsuariosResponse) {}
 }
 
 message Usuario {
@@ -17,9 +17,13 @@ message Usuario {
   int32 age = 2;
 }
 
-message Reply {
+message UsuariosResponse{
+  repeated Usuario usuariosResponse = 1;
+}
+
+message MsgResponse {
   string message = 1;
 }
 
-message Empty {}
+message Empty{}
 
