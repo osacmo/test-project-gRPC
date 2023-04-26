@@ -1,10 +1,10 @@
 import mysql from 'mysql2';
 
 const connection = mysql.createConnection({
-    host: 'localhost',
+    host: 'mysqldb',
     user: 'root',
-    port: 3306,
-    password: 'lucas123!',
+    port: 3307,
+    password: 'secret',
     database: 'test-grpc'
 });
 
@@ -16,6 +16,5 @@ connection.connect(function (err) {
 
     console.log('Database online ' + connection.threadId);
 });
-
 
 export default connection;
