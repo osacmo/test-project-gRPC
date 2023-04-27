@@ -2,10 +2,18 @@ FROM node:18
 
 RUN mkdir -p /home/app
 
-COPY . /home/app
+WORKDIR /home/app
 
-EXPOSE 3000
+COPY package*.json ./
+
+RUN npm install
+
+COPY . .
 
 RUN npm run build
 
-CMD [ "node", /home/app/dist-gRPC-Client/api_server.js ]
+WORKDIR ./dist-gRPC-Client
+
+EXPOSE 3000
+
+CMD node api_server.js 

@@ -11,7 +11,7 @@ function main() {
         agregarUsuario: AgregarUsuario,
         obtenerUsuarios: ObtenerUsuarios
     });
-    server.bindAsync('localhost:50051', ServerCredentials.createInsecure(), () => {
+    server.bindAsync('0.0.0.0:50051', ServerCredentials.createInsecure(), () => {
         server.start();
         console.log('gRPC-Server on port 50051');
     });

@@ -4,7 +4,7 @@
   "description": "",
   "main": "./dist-gRPC-Server/greeter_server.js",
   "scripts": {
-    "start": "node gRPC_server.js",
+    "start": "node dist-gRPC-Server/gRPC_server.js",
     "dev": "node ./dist-gRPC-Server/gRPC_server.js",
     "dev:tsc": "tsc --watch",
     "build": "npm run build:clean && npm run build:tsc",

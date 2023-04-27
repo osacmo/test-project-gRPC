@@ -1,11 +1,11 @@
 import mysql from 'mysql2';
 
 const connection = mysql.createConnection({
-    host: 'mysqldb',
+    host: 'mysql-db',
     user: 'root',
-    port: 3307,
     password: 'secret',
-    database: 'test-grpc'
+    database: 'test-grpc',
+    port: 3306
 });
 
 connection.connect(function (err) {
