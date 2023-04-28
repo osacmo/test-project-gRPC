@@ -2,17 +2,24 @@ import connection from "../database/connection";
 import { ServerUnaryCall, sendUnaryData } from "@grpc/grpc-js";
 import { Empty, MsgResponse, Usuario, UsuariosResponse } from "../../proto/usuarios_pb";
 
-export const AgregarUsuario = (call: ServerUnaryCall<Usuario, MsgResponse>, callback: sendUnaryData<MsgResponse>) => {
+export const AgregarUsuario = async (call: ServerUnaryCall<Usuario, MsgResponse>, callback: sendUnaryData<MsgResponse>) => {
 
     const name = call.request.getAge()
     const age = call.request.getName()
-    const query = `INSERT INTO usuario(usuario, contraseña, estatus, tipoUsuario_idtipoUsuario) VALUES('${name}','${age}', '1', '1')`;
+    const query = `INSERT INTO usuario(usuario, contraseña, estatus, tipoUsuario_idtipoUsuario) VALUES('${name}','${age}', '1')`;
 
-    const mess = new MsgResponse()
-    mess.setMessage("User created.")
+    const mess = new MsgResponse();
+    mess.setMessage("User created.");
 
     connection.query(query, (err) => {
-        if (err) throw (err);
+        if (err) {
+            console.log(err.message);
+            callback({
+                name: "Error in database.",
+                message: err.message,
+                code: 13
+            });
+        }
         callback(null, mess);
     });
 }
@@ -33,7 +40,7 @@ export const ObtenerUsuarios = (call: ServerUnaryCall<Empty, UsuariosResponse>, 
     connection.query(query, (err, result) => {
         if (err) console.log(err);
         const user_res = new UsuariosResponse();
-        user_res.setUsuariosresponseList(data)
+        user_res.setUsuariosresponseList(data);
         callback(null, user_res);
     })
 }

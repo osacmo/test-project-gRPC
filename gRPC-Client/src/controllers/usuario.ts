@@ -9,11 +9,17 @@ export const crearUsuario = async (req: Request, res: Response) => {
     us1.setAge(req.body.age);
 
     client.agregarUsuario(us1, (err, response) => {
-        if (err) console.log(err);
 
-        res.status(200).json({
-            msg: response.getMessage()
-        })
+        if (err) {
+            res.status(500).json({
+                msg: err.name,
+                error: err.message
+            });
+        } else {
+            res.status(200).json({
+                msg: response.getMessage()
+            });
+        }
     });
 }
 

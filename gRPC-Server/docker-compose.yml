@@ -12,3 +12,8 @@ services:
 
     stdin_open: true
     tty: true
+
+networks:
+  default:
+    name: network-grpc
+    external: true

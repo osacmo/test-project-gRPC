@@ -18,3 +18,9 @@ services:
 
 volumes: 
   db:
+
+networks:
+  default:
+    name: network-grpc
+    external: true
+
