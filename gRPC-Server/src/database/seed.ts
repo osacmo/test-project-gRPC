@@ -13,4 +13,4 @@ export function userToClass({ id, usuario, contrasena, estatus, tipo }: Usuario.
 export const data = [
     { id: 1, usuario: "oscar", contrasena: "e", estatus: UsuarioEstatus.AVAILABLE, tipo: UsuarioType.ADMIN },
     { id: 2, usuario: "oscar", contrasena: "e", estatus: UsuarioEstatus.AVAILABLE, tipo: UsuarioType.ADMIN }
-]
+].map(userToClass)

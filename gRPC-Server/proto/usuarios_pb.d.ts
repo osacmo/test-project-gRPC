@@ -39,6 +39,28 @@ export namespace Usuario {
     }
 }
 
+export class UsuariosList extends jspb.Message { 
+    clearUsuariosList(): void;
+    getUsuariosList(): Array<Usuario>;
+    setUsuariosList(value: Array<Usuario>): UsuariosList;
+    addUsuarios(value?: Usuario, index?: number): Usuario;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): UsuariosList.AsObject;
+    static toObject(includeInstance: boolean, msg: UsuariosList): UsuariosList.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: UsuariosList, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): UsuariosList;
+    static deserializeBinaryFromReader(message: UsuariosList, reader: jspb.BinaryReader): UsuariosList;
+}
+
+export namespace UsuariosList {
+    export type AsObject = {
+        usuariosList: Array<Usuario.AsObject>,
+    }
+}
+
 export class MsgResponse extends jspb.Message { 
     getMessage(): string;
     setMessage(value: string): MsgResponse;

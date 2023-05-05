@@ -1,5 +1,6 @@
+import { Usuario } from "../../proto/usuarios_pb";
 
-interface IUser {
+interface IUser  {
     id: number,
     usuario: string,
     contraseña: string,

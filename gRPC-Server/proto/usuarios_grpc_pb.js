@@ -38,6 +38,17 @@ function deserialize_usuarios_Usuario(buffer_arg) {
   return usuarios_pb.Usuario.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_usuarios_UsuariosList(arg) {
+  if (!(arg instanceof usuarios_pb.UsuariosList)) {
+    throw new Error('Expected argument of type usuarios.UsuariosList');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_usuarios_UsuariosList(buffer_arg) {
+  return usuarios_pb.UsuariosList.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_usuarios_getUsuarioRequest(arg) {
   if (!(arg instanceof usuarios_pb.getUsuarioRequest)) {
     throw new Error('Expected argument of type usuarios.getUsuarioRequest');
@@ -76,13 +87,13 @@ var UsuariosService = exports.UsuariosService = {
   obtenerUsuarios: {
     path: '/usuarios.Usuarios/ObtenerUsuarios',
     requestStream: false,
-    responseStream: true,
+    responseStream: false,
     requestType: google_protobuf_empty_pb.Empty,
-    responseType: usuarios_pb.Usuario,
+    responseType: usuarios_pb.UsuariosList,
     requestSerialize: serialize_google_protobuf_Empty,
     requestDeserialize: deserialize_google_protobuf_Empty,
-    responseSerialize: serialize_usuarios_Usuario,
-    responseDeserialize: deserialize_usuarios_Usuario,
+    responseSerialize: serialize_usuarios_UsuariosList,
+    responseDeserialize: deserialize_usuarios_UsuariosList,
   },
 };
 

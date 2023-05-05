@@ -6,7 +6,7 @@ import "google/protobuf/empty.proto";
 service Usuarios{
   rpc AgregarUsuario (Usuario) returns (MsgResponse) {}
   rpc getUsuario (getUsuarioRequest) returns(Usuario) {}
-  rpc ObtenerUsuarios (google.protobuf.Empty) returns (stream Usuario) {}
+  rpc ObtenerUsuarios (google.protobuf.Empty) returns (UsuariosList) {}
 }
 
 enum UsuarioEstatus{
@@ -26,6 +26,10 @@ message Usuario {
   string contrasena = 3;
   UsuarioEstatus estatus = 4;
   UsuarioType tipo = 5;
+}
+
+message UsuariosList{
+  repeated Usuario usuarios = 1;
 }
 
 message MsgResponse {
