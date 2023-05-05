@@ -1,29 +1,37 @@
 syntax = "proto3";
 
-option java_multiple_files = true;
-option java_package = "io.grpc.examples.usuarios";
-option java_outer_classname = "UsuarioProto";
-option objc_class_prefix = "HLW";
-
 package usuarios;
+import "google/protobuf/empty.proto";
 
 service Usuarios{
   rpc AgregarUsuario (Usuario) returns (MsgResponse) {}
-  rpc ObtenerUsuarios (Empty) returns (UsuariosResponse) {}
+  rpc getUsuario (getUsuarioRequest) returns(Usuario) {}
+  rpc ObtenerUsuarios (google.protobuf.Empty) returns (stream Usuario) {}
+}
+
+enum UsuarioEstatus{
+  OFFLINE = 0;
+  AVAILABLE = 1;
+}
+
+enum UsuarioType{
+  UNKNOWN = 0;
+  CLIENTE = 1;
+  ADMIN = 2;
 }
 
 message Usuario {
-  string name = 1;
-  int32 age = 2;
-}
-
-message UsuariosResponse{
-  repeated Usuario usuariosResponse = 1;
+  int32 id = 1;
+  string usuario = 2;
+  string contrasena = 3;
+  UsuarioEstatus estatus = 4;
+  UsuarioType tipo = 5;
 }
 
 message MsgResponse {
   string message = 1;
 }
 
-message Empty{}
-
+message getUsuarioRequest{
+  int32 id = 1;
+}

@@ -1,20 +1,12 @@
-import mysql from 'mysql2';
+import { Sequelize } from "sequelize";
+import 'dotenv/config'
 
-const connection = mysql.createConnection({
-    host: 'mysql-db',
-    user: 'root',
-    password: 'secret',
-    database: 'test-grpc',
-    port: 3306
+const db = new Sequelize(`${process.env.DB_NAME}`,
+    `${process.env.DB_USER}`,
+    `${process.env.DB_PASSWORD}`, {
+    host: `${process.env.DB_HOST}`,
+    dialect: 'mysql',
+    port: parseInt(`${process.env.DB_PORT}`)
 });
 
-connection.connect(function (err) {
-    if (err) {
-        console.error('error connecting: ' + err.stack);
-        return;
-    }
-
-    console.log('Database online ' + connection.threadId);
-});
-
-export default connection;
+export default db;

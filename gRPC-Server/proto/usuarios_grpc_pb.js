@@ -3,16 +3,17 @@
 'use strict';
 var grpc = require('@grpc/grpc-js');
 var usuarios_pb = require('./usuarios_pb.js');
+var google_protobuf_empty_pb = require('google-protobuf/google/protobuf/empty_pb.js');
 
-function serialize_usuarios_Empty(arg) {
-  if (!(arg instanceof usuarios_pb.Empty)) {
-    throw new Error('Expected argument of type usuarios.Empty');
+function serialize_google_protobuf_Empty(arg) {
+  if (!(arg instanceof google_protobuf_empty_pb.Empty)) {
+    throw new Error('Expected argument of type google.protobuf.Empty');
   }
   return Buffer.from(arg.serializeBinary());
 }
 
-function deserialize_usuarios_Empty(buffer_arg) {
-  return usuarios_pb.Empty.deserializeBinary(new Uint8Array(buffer_arg));
+function deserialize_google_protobuf_Empty(buffer_arg) {
+  return google_protobuf_empty_pb.Empty.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
 function serialize_usuarios_MsgResponse(arg) {
@@ -37,15 +38,15 @@ function deserialize_usuarios_Usuario(buffer_arg) {
   return usuarios_pb.Usuario.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
-function serialize_usuarios_UsuariosResponse(arg) {
-  if (!(arg instanceof usuarios_pb.UsuariosResponse)) {
-    throw new Error('Expected argument of type usuarios.UsuariosResponse');
+function serialize_usuarios_getUsuarioRequest(arg) {
+  if (!(arg instanceof usuarios_pb.getUsuarioRequest)) {
+    throw new Error('Expected argument of type usuarios.getUsuarioRequest');
   }
   return Buffer.from(arg.serializeBinary());
 }
 
-function deserialize_usuarios_UsuariosResponse(buffer_arg) {
-  return usuarios_pb.UsuariosResponse.deserializeBinary(new Uint8Array(buffer_arg));
+function deserialize_usuarios_getUsuarioRequest(buffer_arg) {
+  return usuarios_pb.getUsuarioRequest.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
 
@@ -61,16 +62,27 @@ var UsuariosService = exports.UsuariosService = {
     responseSerialize: serialize_usuarios_MsgResponse,
     responseDeserialize: deserialize_usuarios_MsgResponse,
   },
+  getUsuario: {
+    path: '/usuarios.Usuarios/getUsuario',
+    requestStream: false,
+    responseStream: false,
+    requestType: usuarios_pb.getUsuarioRequest,
+    responseType: usuarios_pb.Usuario,
+    requestSerialize: serialize_usuarios_getUsuarioRequest,
+    requestDeserialize: deserialize_usuarios_getUsuarioRequest,
+    responseSerialize: serialize_usuarios_Usuario,
+    responseDeserialize: deserialize_usuarios_Usuario,
+  },
   obtenerUsuarios: {
     path: '/usuarios.Usuarios/ObtenerUsuarios',
     requestStream: false,
-    responseStream: false,
-    requestType: usuarios_pb.Empty,
-    responseType: usuarios_pb.UsuariosResponse,
-    requestSerialize: serialize_usuarios_Empty,
-    requestDeserialize: deserialize_usuarios_Empty,
-    responseSerialize: serialize_usuarios_UsuariosResponse,
-    responseDeserialize: deserialize_usuarios_UsuariosResponse,
+    responseStream: true,
+    requestType: google_protobuf_empty_pb.Empty,
+    responseType: usuarios_pb.Usuario,
+    requestSerialize: serialize_google_protobuf_Empty,
+    requestDeserialize: deserialize_google_protobuf_Empty,
+    responseSerialize: serialize_usuarios_Usuario,
+    responseDeserialize: deserialize_usuarios_Usuario,
   },
 };
 

@@ -1,3 +1,5 @@
 node_modules
 dist-gRPC-Server
 dist-gRPC-Client
+
+.env

@@ -5,12 +5,19 @@
 /* eslint-disable */
 
 import * as jspb from "google-protobuf";
+import * as google_protobuf_empty_pb from "google-protobuf/google/protobuf/empty_pb";
 
 export class Usuario extends jspb.Message { 
-    getName(): string;
-    setName(value: string): Usuario;
-    getAge(): number;
-    setAge(value: number): Usuario;
+    getId(): number;
+    setId(value: number): Usuario;
+    getUsuario(): string;
+    setUsuario(value: string): Usuario;
+    getContrasena(): string;
+    setContrasena(value: string): Usuario;
+    getEstatus(): UsuarioEstatus;
+    setEstatus(value: UsuarioEstatus): Usuario;
+    getTipo(): UsuarioType;
+    setTipo(value: UsuarioType): Usuario;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): Usuario.AsObject;
@@ -24,30 +31,11 @@ export class Usuario extends jspb.Message {
 
 export namespace Usuario {
     export type AsObject = {
-        name: string,
-        age: number,
-    }
-}
-
-export class UsuariosResponse extends jspb.Message { 
-    clearUsuariosresponseList(): void;
-    getUsuariosresponseList(): Array<Usuario>;
-    setUsuariosresponseList(value: Array<Usuario>): UsuariosResponse;
-    addUsuariosresponse(value?: Usuario, index?: number): Usuario;
-
-    serializeBinary(): Uint8Array;
-    toObject(includeInstance?: boolean): UsuariosResponse.AsObject;
-    static toObject(includeInstance: boolean, msg: UsuariosResponse): UsuariosResponse.AsObject;
-    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-    static serializeBinaryToWriter(message: UsuariosResponse, writer: jspb.BinaryWriter): void;
-    static deserializeBinary(bytes: Uint8Array): UsuariosResponse;
-    static deserializeBinaryFromReader(message: UsuariosResponse, reader: jspb.BinaryReader): UsuariosResponse;
-}
-
-export namespace UsuariosResponse {
-    export type AsObject = {
-        usuariosresponseList: Array<Usuario.AsObject>,
+        id: number,
+        usuario: string,
+        contrasena: string,
+        estatus: UsuarioEstatus,
+        tipo: UsuarioType,
     }
 }
 
@@ -71,19 +59,33 @@ export namespace MsgResponse {
     }
 }
 
-export class Empty extends jspb.Message { 
+export class getUsuarioRequest extends jspb.Message { 
+    getId(): number;
+    setId(value: number): getUsuarioRequest;
 
     serializeBinary(): Uint8Array;
-    toObject(includeInstance?: boolean): Empty.AsObject;
-    static toObject(includeInstance: boolean, msg: Empty): Empty.AsObject;
+    toObject(includeInstance?: boolean): getUsuarioRequest.AsObject;
+    static toObject(includeInstance: boolean, msg: getUsuarioRequest): getUsuarioRequest.AsObject;
     static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
     static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-    static serializeBinaryToWriter(message: Empty, writer: jspb.BinaryWriter): void;
-    static deserializeBinary(bytes: Uint8Array): Empty;
-    static deserializeBinaryFromReader(message: Empty, reader: jspb.BinaryReader): Empty;
+    static serializeBinaryToWriter(message: getUsuarioRequest, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): getUsuarioRequest;
+    static deserializeBinaryFromReader(message: getUsuarioRequest, reader: jspb.BinaryReader): getUsuarioRequest;
 }
 
-export namespace Empty {
+export namespace getUsuarioRequest {
     export type AsObject = {
+        id: number,
     }
+}
+
+export enum UsuarioEstatus {
+    OFFLINE = 0,
+    AVAILABLE = 1,
+}
+
+export enum UsuarioType {
+    UNKNOWN = 0,
+    CLIENTE = 1,
+    ADMIN = 2,
 }
